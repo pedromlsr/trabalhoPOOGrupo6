@@ -111,14 +111,16 @@
 	</section>
 	<section name="FatJarPackageWizard">
 		<item key="FatJarPackageWizardPage.ANTSCRIPT_SAVE" value="false"/>
-		<item key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION" value="C:\Users\pedro\OneDrive\Desktop\Residência TIC\Disciplinas\Programação Orientada a Objetos\Trabalho\trab_grupo6"/>
+		<item key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION" value="C:\Users\pedro\OneDrive\Desktop\Residência TIC\Disciplinas\Programação Orientada a Objetos\Trabalho\trab_grupo6.xml"/>
 		<item key="FatJarPackageWizardPage.LIBRARY_HANDLING" value="2"/>
-		<item key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME" value="TesteFuncionario - trab_grupo6"/>
-		<item key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION" value="trab_grupo6\dados\trab_grupo6.jar"/>
+		<item key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME" value="TesteFuncionario (1) - trabGrupo6"/>
+		<item key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION" value="trabGrupo6\dados\trabGrupo6.jar"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="trabGrupo6/dados/trabGrupo6.jar"/>
 			<item value="trab_grupo6/dados/trab_grupo6.jar"/>
 		</list>
 		<list key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION_HISTORY">
+			<item value="C:\Users\pedro\OneDrive\Desktop\Residência TIC\Disciplinas\Programação Orientada a Objetos\Trabalho\trab_grupo6.xml"/>
 			<item value=".xml"/>
 		</list>
 	</section>

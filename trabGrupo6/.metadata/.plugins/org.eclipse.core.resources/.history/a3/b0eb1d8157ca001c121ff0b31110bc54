@@ -33,9 +33,9 @@ public final class Funcionario extends Pessoa implements CalculoINSS, CalculoIR,
 	@Override
 	public String toString() {
 		return "Funcionário: " + nome + "\nCPF: " + cpf + "\nSalário Bruto: R$ " + df.format(salarioBruto)
-				+ "\nNúmero de dependentes: " + numeroDependentes + "\nDedução do INSS: R$ " + df.format(descontoINSS)
-				+ "\nDedução do Imposto de Renda: R$ " + df.format(descontoIR) + "\nSalário Líquido: R$ "
-				+ df.format(salarioLiq);
+				+ "\nNúmero de dependentes: " + numeroDependentes + "\nDedução por dependentes: R$ "
+				+ "\nDedução do INSS: R$ " + df.format(descontoINSS) + "\nDedução do Imposto de Renda: R$ "
+				+ df.format(descontoIR) + "\nSalário Líquido: R$ " + df.format(salarioLiq);
 	}
 
 	public Double getSalarioBruto() {

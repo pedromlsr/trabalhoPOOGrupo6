@@ -23,11 +23,6 @@ public final class Dependente extends Pessoa {
 							+ " (CPF: " + cpf + ") não foi cadastrado(a).");
 		}
 
-		if (dataNascimento.isAfter(LocalDate.now())) {
-			throw new DependenteException("Erro 204: Data de nascimento inválida. O(A) dependente " + nome + " (CPF: "
-					+ cpf + ") não foi cadastrado(a).");
-		}
-
 		this.parentesco = parentesco;
 	}
 
