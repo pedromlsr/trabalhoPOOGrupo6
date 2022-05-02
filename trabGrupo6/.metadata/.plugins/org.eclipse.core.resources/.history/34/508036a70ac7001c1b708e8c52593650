@@ -1,0 +1,16 @@
+package org.serratec.enums;
+
+public enum DeducaoDependente {
+	DEDUCAO_DEPENDENTE(189.59);
+
+	private double deducaoDependente;
+
+	private DeducaoDependente(double deducaoDependente) {
+		this.deducaoDependente = deducaoDependente;
+	}
+
+	public double getDeducaoDependente() {
+		return deducaoDependente;
+	}
+
+}

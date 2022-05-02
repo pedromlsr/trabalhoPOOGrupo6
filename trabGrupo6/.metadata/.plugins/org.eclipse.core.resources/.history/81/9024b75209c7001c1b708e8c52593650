@@ -1,0 +1,15 @@
+package org.serratec.enums;
+
+public enum DeducaoIR {
+	FAIXA_1(0), FAIXA_2(142.80), FAIXA_3(354.80), FAIXA_4(636.13), FAIXA_5(869.36);
+	
+	private double deducao;
+
+	private DeducaoIR(double deducao) {
+		this.deducao = deducao;
+	}
+
+	public double getDeducao() {
+		return deducao;
+	}
+}

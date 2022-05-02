@@ -1,0 +1,15 @@
+package org.serratec.enums;
+
+public enum DescontoIR {
+	FAIXA_1(), FAIXA_2(), FAIXA_3(), FAIXA_4(), FAIXA_5();
+	
+	private double desconto;
+
+	private DescontoIR(double desconto) {
+		this.desconto = desconto;
+	}
+
+	public double getDesconto() {
+		return desconto;
+	}
+}

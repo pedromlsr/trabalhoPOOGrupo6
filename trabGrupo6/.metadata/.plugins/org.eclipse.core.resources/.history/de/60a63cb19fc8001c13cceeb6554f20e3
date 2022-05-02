@@ -1,0 +1,27 @@
+package org.serratec.enums;
+
+import org.serratec.exceptions.DependenteException;
+
+public enum Parentesco {
+	FILHO("FILHO"), SOBRINHO("SOBRINHO"), OUTROS("OUTROS");
+	
+	private String parentesco;
+
+	private Parentesco(String parentesco) {
+		this.parentesco = parentesco;
+	}
+
+	public String getParentesco() {
+		return parentesco;
+	}
+
+	public boolean verificarParentesco(String p) throws DependenteException {
+		boolean a = false;
+		for (Parentesco parentesco : Parentesco.values()) {
+			if (p.equals(parentesco)) {
+				a = true;
+			}
+		} 
+		return a;
+	}
+}

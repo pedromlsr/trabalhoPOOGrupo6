@@ -1,0 +1,15 @@
+package org.serratec.enums;
+
+public enum DescontoINSS {
+	FAIXA_1(0), FAIXA_2(18.18), FAIXA_3(91.00), FAIXA_4(163.82);
+	
+	private double desconto;
+
+	private DescontoINSS(double desconto) {
+		this.desconto = desconto;
+	}
+
+	public double getDesconto() {
+		return desconto;
+	}
+}

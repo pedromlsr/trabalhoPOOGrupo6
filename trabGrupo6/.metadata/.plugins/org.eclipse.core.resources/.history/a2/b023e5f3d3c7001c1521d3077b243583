@@ -1,0 +1,97 @@
+package org.serratec.main;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.serratec.classes.Dependente;
+import org.serratec.classes.Funcionario;
+import org.serratec.enums.Parentesco;
+
+public class TesteFuncionario {
+
+	public static void main(String[] args) {
+		Set<Funcionario> funcionarios = new HashSet<>();
+		String caminho = "\\dados\\entrada.txt";
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(caminho))){
+			String linha = br.readLine();
+
+			while (linha != null) {
+				String[] dadosLinha = linha.split(";");
+				
+				String nome = dadosLinha[0];
+				String cpf = dadosLinha[1];
+				LocalDate dataNascimento = LocalDate.parse(dadosLinha[2].toString(), DateTimeFormatter.BASIC_ISO_DATE);
+				
+				Funcionario funcionario = new Funcionario(null, null, null, null);
+				
+				if (!(dadosLinha[3].equals(Parentesco.PARENTESCO_1.getParentesco()))
+					  || (dadosLinha[3].equals(Parentesco.PARENTESCO_2.getParentesco()))
+					  || (dadosLinha[3].equals(Parentesco.PARENTESCO_3.getParentesco()))) {
+					
+					Double salarioBruto = Double.parseDouble(dadosLinha[3]);
+					
+					Funcionario funcionario = new Funcionario(nome, cpf, dataNascimento, salarioBruto);
+					funcionarios.add(funcionario);
+					
+				} else {
+				String parentesco = dadosLinha[3];
+				Dependente dependente = new Dependente(nome, cpf, dataNascimento, parentesco);
+				
+				}
+				
+				linha = br.readLine();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				
+
+	if(!linha.isEmpty())
+
+	{
+
+		String[] dadosLinha = linha.split(";");
+		String nome = dadosLinha[0];
+		String cpf = dadosLinha[1];
+
+		// String ano = dadosLinha[2].substring(0, 4);
+		// String mes = dadosLinha[2].substring(4, 6);
+		// String dia = dadosLinha[2].substring(6, 8);
+
+		// LocalDate dataNascimento = LocalDate.parse(ano + "-" + mes + "-" + dia);
+
+		// LocalDate dataNascimento = LocalDate.parse(dadosLinha[2].toString(),
+		// DateTimeFormatter.BASIC_ISO_DATE);
+
+		// if (dadosLinha[3] == "FILHO" || dadosLinha[3] == "SOBRINHO" || dadosLinha[3]
+		// == "OUTROS") {
+
+		if ((dadosLinha[3].equals(Parentesco.PARENTESCO_1.getParentesco()))
+				|| (dadosLinha[3].equals(Parentesco.PARENTESCO_2.getParentesco()))
+				|| (dadosLinha[3].equals(Parentesco.PARENTESCO_3.getParentesco()))) {
+			String parentesco = dadosLinha[3];
+			dependentes.add(new Dependente(nome, cpf, dataNascimento, parentesco));
+		} else {
+			Double salarioBruto = Double.parseDouble(dadosLinha[3]);
+			funcionarios.add(new Funcionario(nome, cpf, dataNascimento, salarioBruto));
+		}
+	}}
+
+	}catch(
+
+	Exception e)
+	{
+		e.printStackTrace();
+	}
+
+	for(
+	Funcionario funcionario:funcionarios)
+	{
+		System.out.println(funcionario);
+	}
+}}

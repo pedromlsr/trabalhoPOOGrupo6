@@ -1,0 +1,25 @@
+package org.serratec.classes;
+
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.serratec.interfaces.CalculoINSS;
+import org.serratec.interfaces.CalculoIR;
+import org.serratec.interfaces.CalculoSalarioLiq;
+
+public class Funcionario2 extends Pessoa implements CalculoINSS, CalculoIR, CalculoSalarioLiq {
+	private Double salarioBruto;
+	private Double descontoINSS;
+	private Double descontoIR;
+	private Double salarioLiq;
+	private Integer numeroDependentes;
+	private Set<Dependente> dependentesFunc = new HashSet<>();
+	
+	public Funcionario2(String nome, String cpf, LocalDate dataNascimento, Double salarioBruto) {
+		super(nome, cpf, dataNascimento);
+		this.salarioBruto = salarioBruto;
+	}
+	
+	
+}

@@ -1,0 +1,6 @@
+package org.serratec.exceptions;
+
+public class DependenteException extends RuntimeException {
+	public String DependenteException(String message) {
+		
+}

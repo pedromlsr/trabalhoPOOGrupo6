@@ -1,0 +1,155 @@
+package org.serratec.main;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
+
+import org.serratec.classes.Dependente;
+import org.serratec.classes.Funcionario;
+import org.serratec.enums.Parentesco;
+import org.serratec.exceptions.DependenteException;
+import org.serratec.exceptions.FuncionarioException;
+
+public class TesteFuncionario {
+
+	public static void main(String[] args) {
+		List<Funcionario> funcionariosGeral = new ArrayList<>();
+		List<Dependente> dependentesGeral = new ArrayList<>();
+		Set<Funcionario> funcionarios = new LinkedHashSet<>();
+		Set<Dependente> dependentes = new LinkedHashSet<>();
+		String caminho = "c:\\trabalho\\trabalho.txt";
+
+		try {
+			File arquivo = new File(caminho);
+			Scanner sc = new Scanner(arquivo);
+
+			// Lendo os dados dos funcionarios
+
+			while (sc.hasNextLine()) {
+
+				String linha = sc.nextLine();
+				if (!linha.isEmpty()) {
+					String[] dadosLinhaFunc = linha.split(";");
+					String nomeFunc = dadosLinhaFunc[0];
+					String cpfFunc = dadosLinhaFunc[1];
+
+					LocalDate dataNascimentoFunc = LocalDate.parse(dadosLinhaFunc[2].toString(),
+							DateTimeFormatter.BASIC_ISO_DATE);
+					Double salarioBruto = Double.parseDouble(dadosLinhaFunc[3]);
+
+					Funcionario funcionario = new Funcionario(nomeFunc, cpfFunc, dataNascimentoFunc, salarioBruto);
+					funcionarios.add(funcionario);
+					funcionariosGeral.add(funcionario);
+
+					// Lendo os dados dos dependentes
+
+					while (!linha.isEmpty() && sc.hasNextLine()) {
+
+						linha = sc.nextLine();
+						if (!linha.isEmpty()) {
+							String[] dadosLinhaDep = linha.split(";");
+							String nomeDep = dadosLinhaDep[0];
+							String cpfDep = dadosLinhaDep[1];
+
+							LocalDate dataNascimentoDep = LocalDate.parse(dadosLinhaDep[2].toString(),
+									DateTimeFormatter.BASIC_ISO_DATE);
+							String parentesco = dadosLinhaDep[3];
+							try {
+								Dependente dependente = new Dependente(nomeDep, cpfDep, dataNascimentoDep,
+										Parentesco.valueOf(Parentesco.class, parentesco));
+
+								dependentesGeral.add(dependente);
+								dependentes.add(dependente);
+
+								for (Dependente dependente2 : dependentes) {
+									if ((cpfDep.equals(dependente2.getCpf()))) {
+										funcionario.adicionarDependente(dependente);
+									}
+								}
+
+							} catch (DependenteException e) {
+								System.out.println(("Erro - 202: " + e.getMessage()));
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+			sc.close();
+
+			for (Dependente geral : dependentesGeral) {
+				try {
+					for (Dependente unico : dependentes) {
+						if (geral.getCpf().equals(unico.getCpf()) && geral.getNome() != unico.getNome()) {
+
+							throw new DependenteException("Não foi possível cadastrar o dependente: " + geral.getNome()
+									+ " CPF(" + geral.getCpf()
+									+ "). Verifique se os dados foram inseridos corretamente!");
+
+						}
+
+					}
+				} catch (DependenteException e) {
+					System.out.println("Erro - 200: " + e.getMessage());
+				}
+			}
+
+			for (Funcionario geral : funcionariosGeral) {
+				try {
+					for (Funcionario unico : funcionarios) {
+
+						if (geral.getCpf().equals(unico.getCpf()) && geral.getNome() != unico.getNome()) {
+							throw new FuncionarioException("Não foi possível cadastrar o funcionário: "
+									+ geral.getNome() + " CPF(" + geral.getCpf()
+									+ "). Verifique se os dados foram inseridos corretamente!");
+						}
+
+					}
+				} catch (FuncionarioException e) {
+					System.out.println("Erro - 300: " + e.getMessage());
+				}
+
+			}
+
+		} catch (IOException e) {
+			System.out.println("Erro - 100: " + e.getMessage());
+		}
+
+		for (Funcionario funcionario : funcionarios) {
+			funcionario.calcularINSS();
+			funcionario.calcularIR();
+			funcionario.calcularSalarioLiq();
+			System.out.println(funcionario);
+		}
+
+		System.out.println("\n----------------------Lista de dependentes---------------------------");
+
+		for (Dependente dependente : dependentes) {
+			System.out.println(dependente);
+		}
+
+		System.out.println("\n----------------------Lista Geral de funcionários---------------------------");
+		for (Funcionario funcionario : funcionariosGeral) {
+			funcionario.calcularINSS();
+			funcionario.calcularIR();
+			funcionario.calcularSalarioLiq();
+			System.out.println(funcionario.getNome() + " " + funcionario.getCpf());
+		}
+
+		System.out.println("\n----------------------Lista Geral de Dependentes---------------------------");
+		for (Dependente dependente : dependentesGeral) {
+			System.out.println(dependente.getNome() + " " + dependente.getCpf());
+		}
+
+	}
+
+}
