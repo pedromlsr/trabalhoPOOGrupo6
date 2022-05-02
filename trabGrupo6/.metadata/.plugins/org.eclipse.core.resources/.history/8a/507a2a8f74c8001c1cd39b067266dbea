@@ -1,0 +1,30 @@
+package org.serratec.classes;
+
+import java.time.LocalDate;
+import java.util.Objects;
+
+import org.serratec.enums.Parentesco;
+
+public class Dependente extends Pessoa {
+	private String parentesco;
+
+	public Dependente(String nome, String cpf, LocalDate dataNascimento, String parentesco) {
+		super(nome, cpf, dataNascimento);
+		this.parentesco = parentesco;
+	}
+
+	@Override
+	public String toString() {
+		return "Dependente [parentesco=" + parentesco + ", nome=" + nome + ", cpf=" + cpf + ", dataNascimento=" + dataNascimento + "]";
+	}
+
+	public String getParentesco() {
+		return parentesco;
+	}
+
+	@Override
+	public Boolean verificarMaioridade() {
+		return super.verificarMaioridade();
+	}
+	
+}

@@ -1,0 +1,106 @@
+package org.serratec.classes;
+
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.serratec.enums.AliquotaINSS;
+import org.serratec.enums.AliquotaIR;
+import org.serratec.enums.BaseSalarialINSS;
+import org.serratec.enums.BaseSalarialIR;
+import org.serratec.enums.DeducaoINSS;
+import org.serratec.enums.DeducaoIR;
+import org.serratec.interfaces.CalculoINSS;
+import org.serratec.interfaces.CalculoIR;
+import org.serratec.interfaces.CalculoSalarioLiq;
+
+public final class Funcionario extends Pessoa implements CalculoINSS, CalculoIR, CalculoSalarioLiq {
+	private Double salarioBruto;
+	private Double descontoINSS;
+	private Double descontoIR;
+	private Double salarioLiq;
+	private Integer numeroDependentes;
+	
+	private Set<Dependente> dependentesFunc = new HashSet<>();
+	
+	public Funcionario(String nome, String cpf, LocalDate dataNascimento, Double salarioBruto) {
+		super(nome, cpf, dataNascimento);
+		this.salarioBruto = salarioBruto;
+	}
+
+	DecimalFormat df = new DecimalFormat("0.00");
+
+	@Override
+	public String toString() {
+		return "Funcionário: " + nome + "\nCPF: " + cpf + "\nSalário Bruto: R$ " + df.format(salarioBruto)
+				+ "\nNúmero de dependentes: " + numeroDependentes + "\nDedução por dependentes: R$ "
+				+ "\nDedução do INSS: R$ " + df.format(descontoINSS) + "\nDedução do Imposto de Renda: R$ "
+				+ df.format(descontoIR) + "\nSalário Líquido: R$ " + df.format(salarioLiq);
+	}
+
+	public Double getSalarioBruto() {
+		return salarioBruto;
+	}
+
+	public Double getDescontoINSS() {
+		return descontoINSS;
+	}
+
+	public Double getDescontoIR() {
+		return descontoIR;
+	}
+
+	public Double getSalarioLiq() {
+		return salarioLiq;
+	}
+
+	public Set<Dependente> getDependentesFunc() {
+		return dependentesFunc;
+	}
+
+	@Override
+	public void calcularINSS() {
+		if (salarioBruto <= BaseSalarialINSS.FAIXA_1.getSalario()) {
+			descontoINSS = (salarioBruto * AliquotaINSS.FAIXA_1.getAliquota()) - DeducaoINSS.FAIXA_1.getDeducao();
+		} else if (salarioBruto <= BaseSalarialINSS.FAIXA_2.getSalario()) {
+			descontoINSS = (salarioBruto * AliquotaINSS.FAIXA_2.getAliquota()) - DeducaoINSS.FAIXA_2.getDeducao();
+		} else if (salarioBruto <= BaseSalarialINSS.FAIXA_3.getSalario()) {
+			descontoINSS = (salarioBruto * AliquotaINSS.FAIXA_3.getAliquota()) - DeducaoINSS.FAIXA_3.getDeducao();
+		} else if (salarioBruto <= BaseSalarialINSS.FAIXA_4.getSalario()) {
+			descontoINSS = (salarioBruto * AliquotaINSS.FAIXA_4.getAliquota()) - DeducaoINSS.FAIXA_4.getDeducao();
+		} else {
+			descontoINSS = (BaseSalarialINSS.FAIXA_4.getSalario() * AliquotaINSS.FAIXA_4.getAliquota())
+					- DeducaoINSS.FAIXA_4.getDeducao();
+		}
+
+	}
+
+	@Override
+	public void calcularIR() {
+		Double valorParcial = salarioBruto - (DEDUCAO_DEP * numeroDependentes) - descontoINSS;
+
+		if (valorParcial <= BaseSalarialIR.FAIXA_1.getSalario()) {
+			descontoIR = valorParcial * AliquotaIR.FAIXA_1.getAliquota() - DeducaoIR.FAIXA_1.getDeducao();
+		} else if (valorParcial <= BaseSalarialIR.FAIXA_2.getSalario()) {
+			descontoIR = valorParcial * AliquotaIR.FAIXA_2.getAliquota() - DeducaoIR.FAIXA_2.getDeducao();
+		} else if (valorParcial <= BaseSalarialIR.FAIXA_3.getSalario()) {
+			descontoIR = valorParcial * AliquotaIR.FAIXA_3.getAliquota() - DeducaoIR.FAIXA_3.getDeducao();
+		} else if (valorParcial <= BaseSalarialIR.FAIXA_4.getSalario()) {
+			descontoIR = valorParcial * AliquotaIR.FAIXA_4.getAliquota() - DeducaoIR.FAIXA_4.getDeducao();
+		} else {
+			descontoIR = valorParcial * AliquotaIR.FAIXA_5.getAliquota() - DeducaoIR.FAIXA_5.getDeducao();
+		}
+	}
+
+	@Override
+	public void calcularSalarioLiq() {
+		salarioLiq = salarioBruto - descontoINSS - descontoIR;
+	}
+
+	public void adicionarDependente(Dependente dependente) {
+		dependentes.add(dependente);
+		numeroDependentes++;
+	}
+
+}

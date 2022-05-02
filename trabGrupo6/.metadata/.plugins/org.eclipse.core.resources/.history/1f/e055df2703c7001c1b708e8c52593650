@@ -1,0 +1,5 @@
+package org.serratec.classes;
+
+public abstract class Pessoa {
+
+}

@@ -1,0 +1,15 @@
+package org.serratec.enums;
+
+public enum DeducaoINSS {
+	FAIXA_1(0), FAIXA_2(18.18), FAIXA_3(91.00), FAIXA_4(163.82);
+	
+	private double deducao;
+
+	private DeducaoINSS(double deducao) {
+		this.deducao = deducao;
+	}
+
+	public double getDeducao() {
+		return deducao;
+	}
+}

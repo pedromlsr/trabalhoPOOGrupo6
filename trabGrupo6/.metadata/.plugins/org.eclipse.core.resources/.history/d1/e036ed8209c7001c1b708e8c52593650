@@ -1,0 +1,16 @@
+package org.serratec.enums;
+
+public enum DescontoDependente {
+	DESCONTO_DEPENDENTE(189.59);
+
+	private double descontoDependente;
+
+	private DescontoDependente(double descontoDependente) {
+		this.descontoDependente = descontoDependente;
+	}
+
+	public double getDescontoDependente() {
+		return descontoDependente;
+	}
+
+}

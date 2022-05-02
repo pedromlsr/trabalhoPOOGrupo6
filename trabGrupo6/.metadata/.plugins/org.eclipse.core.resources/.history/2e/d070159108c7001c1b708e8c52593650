@@ -1,0 +1,16 @@
+package org.serratec.enums;
+
+public enum AliquotaINSS {
+	FAIXA_1(), FAIXA_2(), FAIXA_3(), FAIXA_4();
+	
+	private double aliquota;
+
+	private AliquotaINSS(double aliquota) {
+		this.aliquota = aliquota;
+	}
+
+	public double getAliquota() {
+		return aliquota;
+	}
+	
+}

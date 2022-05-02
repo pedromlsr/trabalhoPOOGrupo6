@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="org.serratec.enums.AliquotaINSS"/>
+    <fullyQualifiedTypeName name="org.serratec.enums.DescontoINSS"/>
+    <fullyQualifiedTypeName name="org.serratec.enums.DescontoDependente"/>
+    <fullyQualifiedTypeName name="org.serratec.enums.BaseSalarialINSS"/>
+    <fullyQualifiedTypeName name="org.serratec.enums.BaseSalarialIR"/>
+    <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
+    <fullyQualifiedTypeName name="org.serratec.classes.Funcionario"/>
+    <fullyQualifiedTypeName name="org.serratec.classes.Dependente"/>
+    <fullyQualifiedTypeName name="java.text.DecimalFormat"/>
+    <fullyQualifiedTypeName name="org.serratec.enums.Parentesco"/>
+    <fullyQualifiedTypeName name="java.io.BufferedWriter"/>
+    <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
+</qualifiedTypeNameHistroy>
